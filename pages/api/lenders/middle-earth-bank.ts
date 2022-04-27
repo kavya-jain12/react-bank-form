@@ -1,15 +1,20 @@
 import { NextApiRequest, NextApiResponse } from 'next';
 
-import { LenderGetResponse, LenderPostResponse } from 'lib/types';
+import { LenderGetResponseExtended, LenderPostResponse } from 'lib/types';
 
-export const middleEarthBankData: LenderGetResponse = {
+export const middleEarthBankData: LenderGetResponseExtended = {
   name: 'Middle Earth Bank',
-  fields: ['first_name', 'email', 'date_of_birth', 'monthly_income'],
+  fields: [
+    { name: 'first_name', type: 'text', required: true },
+    { name: 'last_name', type: 'text', required: true },
+    { name: 'date_of_birth', type: 'date', required: true },
+    { name: 'monthly_income', type: 'number', required: false },
+  ],
 };
 
 const handler = (
   req: NextApiRequest,
-  res: NextApiResponse<LenderGetResponse | LenderPostResponse>,
+  res: NextApiResponse<LenderGetResponseExtended | LenderPostResponse>,
 ): void => {
   if (req.method === 'POST') {
     const decision = Math.random() > 0.3 ? 'accepted' : 'declined';

@@ -26,3 +26,11 @@ export interface LenderFields {
 export interface LenderPostResponse {
   decision: 'accepted' | 'declined';
 }
+
+export interface LenderPageError {
+  statusCode?: number;
+}
+
+export * from './link';
+export * from './button';
+export * from './question';
