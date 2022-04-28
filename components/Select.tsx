@@ -1,11 +1,11 @@
 import React from 'react';
-import { Question } from 'lib/types';
+import { QuestionProps } from 'lib/types';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import { Select } from '@mui/material';
 
-const SelectQuestion: React.FC<{ question: Question; handleChange: any }> = ({
+const SelectQuestion: React.FC<{ question: QuestionProps; handleChange: any }> = ({
   question,
   handleChange,
 }) => {
@@ -25,26 +25,28 @@ const SelectQuestion: React.FC<{ question: Question; handleChange: any }> = ({
         {question.name.replace(/_/g, ' ')}
       </InputLabel>
       <Select
+        defaultValue=""
         id={question.name}
         name={question.name}
         onChange={handleChange}
         required={question.required}
         label={question.name.replace(/_/g, ' ')}
+        data-testid={question.name}
       >
         {question.options ? (
           question.options.map((option: string, index: number) => {
             return (
-              <MenuItem key={index} value={option}>
+              <MenuItem key={index} value={option} data-testid={option}>
                 {option}
               </MenuItem>
             );
           })
         ) : (
           <div>
-            <MenuItem key={'female'} value={'female'}>
+            <MenuItem key={'female'} value={'female'} data-testid={'female'}>
               Female
             </MenuItem>
-            <MenuItem key={'male'} value={'male'}>
+            <MenuItem key={'male'} value={'male'} data-testid={'male'}>
               Male
             </MenuItem>
           </div>

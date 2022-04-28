@@ -1,9 +1,9 @@
 import React from 'react';
 import { TextField } from '@mui/material';
-import { Question } from 'lib/types';
+import { QuestionProps } from 'lib/types';
 
 const email: React.FC<{
-  question: Question;
+  question: QuestionProps;
   formData: any;
   handleChange: any;
 }> = ({ question, formData, handleChange }) => {
@@ -33,6 +33,7 @@ const email: React.FC<{
       }}
       onChange={handleChange}
       error={validateEmail(formData)}
+      data-testid={question.name}
     />
   );
 };

@@ -30,7 +30,7 @@ const HomePage: NextPage = () => {
       noValidate
       autoComplete="off"
     >
-      <Typography variant="h5" component="h5" sx={{ paddingX: 2 }}>
+      <Typography variant="h5" component="h5" sx={{ paddingX: 2 }} data-testid={'app-title'}>
         Choose your Bank
       </Typography>
       <List>

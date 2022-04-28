@@ -6,9 +6,10 @@ import {
   Grid,
   Typography,
   LinearProgress,
-  Alert,
 } from '@mui/material';
-import { CustomButton, CustomLink } from './Button';
+import { CustomButton } from './Button';
+import { LenderGetExtendedArray } from './utility/LenderExtendArray';
+import Success from './Success';
 
 type Props = {
   slug: string;
@@ -29,21 +30,6 @@ const Lender = ({ slug }: Props): JSX.Element => {
     {},
   );
 
-  const generateQuestionType = (field: string) => {
-    switch (field) {
-      case 'email':
-        return 'email';
-      case 'date_of_birth':
-        return 'date';
-      case 'gender':
-        return 'select';
-      case 'monthly_income':
-        return 'number';
-      default:
-        return 'text';
-    }
-  };
-
   useEffect(() => {
     if (slug) {
       setLoading(true);
@@ -52,14 +38,7 @@ const Lender = ({ slug }: Props): JSX.Element => {
         .then((data) => {
           if (slug === 'bank-of-azeroth') {
             // map string values to object type
-            data.fields = data.fields.map((field: any) => {
-              const questionType = generateQuestionType(field);
-              return Object.assign({
-                name: field,
-                type: questionType,
-                required: false,
-              });
-            });
+            data.fields = LenderGetExtendedArray(data.fields)
           }
           setData(data);
           setLoading(false);
@@ -81,6 +60,7 @@ const Lender = ({ slug }: Props): JSX.Element => {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>): void => {
     event.preventDefault();
     setLoading(true);
+
     fetch(`/api/lenders/${slug}`, {
       method: 'POST',
       headers: {
@@ -91,8 +71,10 @@ const Lender = ({ slug }: Props): JSX.Element => {
       setSuccess(true);
       setFormData({});
     });
+
     setLoading(false);
   };
+
 
   return (
     <Box
@@ -109,23 +91,9 @@ const Lender = ({ slug }: Props): JSX.Element => {
         width: ['auto', '500px', '700px'],
       }}
     >
-      {isLoading ? (
-        <LinearProgress color="secondary" />
-      ) : success ? (
-        <>
-          <Alert severity="success" sx={{ marginBottom: 4 }}>
-            Application Submitted
-          </Alert>
-          <CustomLink
-            href={'/'}
-            type='button'
-            variant='button'
-            color='secondary'
-            text='home'
-            underline='none'
-          />
-        </>
-      ) : (
+      {isLoading ? <LinearProgress color="secondary" />
+      : success ? <Success text={'Application Submitted'} /> 
+      : (
         <>
           <Typography
             variant="h4"
@@ -137,7 +105,7 @@ const Lender = ({ slug }: Props): JSX.Element => {
             {`Welcome to ${data?.name}`}
           </Typography>
 
-           {/* application form */}
+          {/* application form */}
           <form onSubmit={handleSubmit}>
             <Grid container spacing={3}>
               {data?.fields.map((question, index) => {

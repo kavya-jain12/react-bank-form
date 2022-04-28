@@ -25,6 +25,10 @@ context('Home Page', () => {
   });
 
   it('will check if all important elements are in place:', () => {
+    cy.get('[data-testid="app-title"]')
+    .should('be.visible')
+    .should('have.text', 'Choose your Bank');
+
     this.lenders.forEach((lender: LenderFixture) => {
       cy.get(`[data-testid="${lender.slug}"]`)
         .should('be.visible')

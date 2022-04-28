@@ -1,8 +1,8 @@
 import React from 'react';
 import { TextField } from '@mui/material';
-import { Question } from 'lib/types';
+import { QuestionProps } from 'lib/types';
 
-const Text: React.FC<{ question: Question; handleChange: any }> = ({
+const Text: React.FC<{ question: QuestionProps; handleChange: any }> = ({
   question,
   handleChange,
 }) => {
@@ -20,6 +20,7 @@ const Text: React.FC<{ question: Question; handleChange: any }> = ({
         textTransform: 'capitalize',
       }}
       onChange={handleChange}
+      data-testid={question.name}
     />
   );
 };

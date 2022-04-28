@@ -1,8 +1,8 @@
 import React from 'react';
 import { Checkbox, FormControl, FormControlLabel } from '@mui/material';
-import { Question } from 'lib/types';
+import { QuestionProps } from 'lib/types';
 
-const CheckboxQuestion: React.FC<{ question: Question; handleChange: any }> = ({
+const CheckboxQuestion: React.FC<{ question: QuestionProps; handleChange: any }> = ({
   question,
   handleChange,
 }) => {
@@ -27,6 +27,7 @@ const CheckboxQuestion: React.FC<{ question: Question; handleChange: any }> = ({
         name={question.name}
         label={question.name.replace(/_/g, ' ')}
         onChange={handleChange}
+        data-testid={question.name}
       />
     </FormControl>
   );

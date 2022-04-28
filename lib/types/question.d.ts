@@ -6,7 +6,7 @@ export type QuestionType =
   | 'select'
   | 'checkbox';
 
-export type Question = {
+export type QuestionProps = {
   name: string;
   type: QuestionType;
   required?: boolean;

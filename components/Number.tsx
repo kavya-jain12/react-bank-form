@@ -5,9 +5,9 @@ import {
   InputLabel,
   OutlinedInput,
 } from '@mui/material';
-import { Question } from 'lib/types';
+import { QuestionProps } from 'lib/types';
 
-const Number: React.FC<{ question: Question; handleChange: any }> = ({
+const Number: React.FC<{ question: QuestionProps; handleChange: any }> = ({
   question,
   handleChange,
 }) => {
@@ -33,6 +33,7 @@ const Number: React.FC<{ question: Question; handleChange: any }> = ({
         label={question.name.replace(/_/g, ' ')}
         onChange={handleChange}
         startAdornment={<InputAdornment position="start">£</InputAdornment>}
+        data-testid={question.name}
       />
     </FormControl>
   );

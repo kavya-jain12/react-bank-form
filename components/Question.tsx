@@ -1,5 +1,5 @@
 import React from 'react';
-import { Question, QuestionType } from 'lib/types';
+import { QuestionProps, QuestionType } from 'lib/types';
 import text from './Text';
 import number from './Number';
 import email from './Email';
@@ -9,7 +9,7 @@ import checkbox from './Checkbox';
 
 type Props = {
   formData: any;
-  question: Question;
+  question: QuestionProps;
   handleChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
 }
 
